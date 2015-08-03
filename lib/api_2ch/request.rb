@@ -11,6 +11,9 @@ module Api2ch
       make_request(board)
     end
 
+    def most_viewed_threads(board)
+      most_viewed(board)
+    end
 
     private
 
@@ -18,7 +21,11 @@ module Api2ch
       response = HTTParty.get("#{BASE_URL}#{board}/threads.json")
       JSON.parse(response.body)
     end
-    
+
+    def most_viewed(board)
+      board_threads = make_request(board)
+      board_threads['threads'].map { |i| i['subject'].scrub! }
+      board_threads['threads'].sort_by { |i| - i['views'] }
+    end
   end
-  
 end
