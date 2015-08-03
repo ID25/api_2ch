@@ -27,21 +27,42 @@ Then, get json with thread list.
 ```
 For example, lets put in view name of threads
 ```slim
-- @dvach["threads"].each do |thread|
+- @threads["threads"].each do |thread|
   p= thread["subject"]
   small= "Views: #{thread['views']}"
   hr
 ```
 
-## Development
+## Api
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
+First, create new Request
+```ruby
+request = Api2ch::Request.new
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Get threads json.
+```ruby
+@threads = request.get_threads('pr')
+```
+
+Get most viewed threads.
+```ruby
+@threads = request.most_viewed_threads('fg')
+```
+
+```json
+["timestamp"] = The creation of the thread
+["threads"]   = Array of threads
+["subject"]   = Thread name
+["views"]     = Thread views
+["board"]     = Board name
+["score"]     = Popularity thread
+["num"]       = Thread number
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/api_2ch/fork )
+1. Fork it ( https://github.com/ID25/api_2ch/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
