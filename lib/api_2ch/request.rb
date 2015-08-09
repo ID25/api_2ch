@@ -15,7 +15,7 @@ module Api2ch
       most_viewed(board)
     end
 
-    private
+    protected
 
     def make_request(board)
       response = HTTParty.get("#{BASE_URL}#{board}/threads.json")
