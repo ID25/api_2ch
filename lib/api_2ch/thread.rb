@@ -3,25 +3,24 @@ module Api2ch
   class Thread < Request
 
     def posts(board)
-      posts = make_request(board)
-      thread_list(posts)
+      thread_list(board)
     end
 
     private
 
-    def thread_list(posts)
+    def thread_list(board)
+      posts = make_request(board)
       arr = []
       posts['threads'].map { |i| arr << i["num"] }
       post_list = arr.uniq.map(&:to_i)
 
       post_list.each do |num|
         @post_thread = []
-        # fix @board variable to dynamic variable
-        @post_thread << HTTParty.get("#{BASE_URL}#{@board}/res/#{num}.json")
+        @post_thread << HTTParty.get("#{BASE_URL}#{board}/res/#{num}.json")
       end
-      final = []
+      op_posts = []
       @post_thread.each do |res|
-        final << JSON.parse(res.body)
+        op_posts << JSON.parse(res.body)
       end
     end
     
