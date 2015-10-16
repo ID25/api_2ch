@@ -1,8 +1,9 @@
-require "httparty"
-require "api_2ch/version"
-require "api_2ch/request"
-require "api_2ch/thread"
+require 'httparty'
+require 'api_2ch/version'
+require 'api_2ch/methods/threads'
+require 'api_2ch/request'
+require 'api_2ch/thread'
 
 module Api2ch
-  # Your code goes here...
+  BASE_URL = 'https://2ch.hk/'
 end
