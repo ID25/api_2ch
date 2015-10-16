@@ -23,7 +23,7 @@ request = Api2ch::Request.new
 ```
 Then, get json with thread list.
 ```ruby
-@threads = request.get_threads('pr')
+@threads = request.call_threads('pr')
 ```
 For example, lets put in view name of threads
 ```slim
@@ -35,19 +35,34 @@ For example, lets put in view name of threads
 
 ## Api
 
-First, create new Request
+#### Get threads json.
 ```ruby
-request = Api2ch::Request.new
+@threads = request.call_threads('pr')
 ```
 
-Get threads json.
+#### Get threads json with full info.
 ```ruby
-@threads = request.get_threads('pr')
+@threads = request.call_full_threads('pr', page) #default: 'index'
 ```
 
-Get most viewed threads.
+#### Get most viewed threads.
 ```ruby
-@threads = request.most_viewed_threads('fg')
+@threads = request.call_most_viewed_threads('fg')
+```
+
+#### Get posts from thread.
+```ruby
+@threads = request.call_thread_posts('rf', 543235) #second argument - thread number
+```
+
+#### Get latest bumped threads.
+```ruby
+@threads = request.call_latest_bump_threads('ga')
+```
+
+#### Get recent created threads.
+```ruby
+@threads = request.call_new_threads('sci')
 ```
 
 ```json
