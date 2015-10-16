@@ -17,4 +17,13 @@ describe Api2ch do
       expect(json['threads']).to be_an_instance_of(Array)
     end
   end
+
+  describe '#call_thread_posts' do
+    request = Api2ch::Request.new
+    json    = request.call_thread_posts('abu', 42375)
+
+    it 'return json posts' do
+      expect(json).to be_an_instance_of(Array)
+    end
+  end
 end

@@ -8,6 +8,10 @@ module Api2ch
       Api2ch::Threads.new(board, page).call
     end
 
+    def call_thread_posts(board, num)
+      Api2ch::Posts.new(board, num).call
+    end
+
     def most_viewed_threads(board)
       most_viewed(board)
     end
