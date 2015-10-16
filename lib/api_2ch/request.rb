@@ -4,8 +4,12 @@ module Api2ch
       @board = board
     end
 
-    def call_threads(board, page = 'index')
-      Api2ch::Threads.new(board, page).call
+    def call_full_threads(board, page = 'index')
+      Api2ch::Threads.new(board, page).full
+    end
+
+    def call_threads(board)
+      Api2ch::Threads.new(board, nil).call
     end
 
     def call_thread_posts(board, num)
