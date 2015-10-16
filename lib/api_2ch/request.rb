@@ -12,6 +12,10 @@ module Api2ch
       Api2ch::Posts.new(board, num).call
     end
 
+    def call_latest_bump_threads(board)
+      Api2ch::LatestThreads.new(board).call
+    end
+
     def most_viewed_threads(board)
       most_viewed(board)
     end

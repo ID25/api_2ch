@@ -26,4 +26,13 @@ describe Api2ch do
       expect(json).to be_an_instance_of(Array)
     end
   end
+
+  describe '#call_latest_bump_threads' do
+    request = Api2ch::Request.new
+    json    = request.call_latest_bump_threads('pr')
+
+    it 'return lastest bumped threads' do
+      expect(json).to include { 'ньюфаг тред' }
+    end
+  end
 end
