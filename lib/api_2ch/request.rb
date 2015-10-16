@@ -19,5 +19,9 @@ module Api2ch
     def call_most_viewed_threads(board)
       Api2ch::ViewedThreads.new(board).call
     end
+
+    def call_new_threads(board)
+      Api2ch::NewThreads.new(board).call
+    end
   end
 end
