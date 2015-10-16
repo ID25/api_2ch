@@ -35,4 +35,13 @@ describe Api2ch do
       expect(json).to include { 'ньюфаг тред' }
     end
   end
+
+  describe '#most_viewed_threads' do
+    request = Api2ch::Request.new
+    json    = request.call_most_viewed_threads('rf')
+
+    it 'return most viewed threads' do
+      expect(json.map{ |i| i['views'] }).not_to include 0
+    end
+  end
 end

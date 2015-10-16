@@ -16,16 +16,8 @@ module Api2ch
       Api2ch::LatestThreads.new(board).call
     end
 
-    def most_viewed_threads(board)
-      most_viewed(board)
-    end
-
-    protected
-
-    def most_viewed(board)
-      board_threads = make_request(board)
-      board_threads['threads'].map     { |i| i['subject'].scrub! }
-      board_threads['threads'].sort_by { |i| - i['views'] }
+    def call_most_viewed_threads(board)
+      Api2ch::ViewedThreads.new(board).call
     end
   end
 end
