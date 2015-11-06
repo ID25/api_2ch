@@ -6,7 +6,7 @@ module Api2ch
 
     def call
       response = HTTParty.get("#{BASE_URL}#{@board}/catalog_num.json")
-      json     = JSON.parse(response.body)
+      json = JSON.parse(response.body)
       json['threads']
     end
   end

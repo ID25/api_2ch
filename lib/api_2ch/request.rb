@@ -4,28 +4,28 @@ module Api2ch
       @board = board
     end
 
-    def call_full_threads(board, page = 'index')
-      Api2ch::Threads.new(board, page).full
+    def call_full_threads(page = 'index')
+      Api2ch::Threads.new(@board, page).full
     end
 
-    def call_threads(board)
-      Api2ch::Threads.new(board, nil).call
+    def call_threads
+      Api2ch::Threads.new(@board).call
     end
 
-    def call_thread_posts(board, num)
-      Api2ch::Posts.new(board, num).call
+    def call_thread_posts(thread_number)
+      Api2ch::Posts.new(@board, thread_number).call
     end
 
-    def call_latest_bump_threads(board)
-      Api2ch::LatestThreads.new(board).call
+    def call_latest_bump_threads
+      Api2ch::LatestThreads.new(@board).call
     end
 
-    def call_most_viewed_threads(board)
-      Api2ch::ViewedThreads.new(board).call
+    def call_most_viewed_threads
+      Api2ch::ViewedThreads.new(@board).call
     end
 
-    def call_new_threads(board)
-      Api2ch::NewThreads.new(board).call
+    def call_new_threads
+      Api2ch::NewThreads.new(@board).call
     end
   end
 end

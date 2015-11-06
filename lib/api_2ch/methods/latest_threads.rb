@@ -5,8 +5,8 @@ module Api2ch
     end
 
     def call
-      response  = HTTParty.get("#{BASE_URL}#{@board}/catalog.json")
-      json      = JSON.parse(response.body)
+      response = HTTParty.get("#{BASE_URL}#{@board}/catalog.json")
+      json = JSON.parse(response.body)
       @subjects = []
       @comments = []
       json['threads'].each do |thread|

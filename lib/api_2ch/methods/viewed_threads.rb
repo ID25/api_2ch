@@ -6,7 +6,7 @@ module Api2ch
 
     def call
       board_threads = make_request(@board)
-      board_threads['threads'].map     { |i| i['subject'].scrub! }
+      board_threads['threads'].map { |i| i['subject'].scrub! }
       board_threads['threads'].sort_by { |i| - i['views'] }
     end
 
