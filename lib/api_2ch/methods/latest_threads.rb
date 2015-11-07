@@ -2,13 +2,11 @@ module Api2ch
   class LatestThreads < Threads
     def call
       json = get_response(:catalog)
-      @subjects = []
-      @comments = []
+      res = {}
       json['threads'].each do |thread|
-        @subjects << thread['subject']
-        @comments << thread['comment']
+        res[thread['date']] = thread['comment']
       end
-      Hash[@subjects.zip(@comments)]
+      res
     end
   end
 end

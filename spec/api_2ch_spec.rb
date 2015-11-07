@@ -55,6 +55,10 @@ describe Api2ch do
     it 'return most viewed threads' do
       expect(json.map{ |i| i['views'] }).not_to include 0
     end
+
+    it 'return threads sorted by view' do
+      expect(json.map { |i| i['views'] }.each_cons(2).all? { |curr, prev| prev <= curr }).to eq(true)
+    end
   end
 
   describe '#new_threads' do

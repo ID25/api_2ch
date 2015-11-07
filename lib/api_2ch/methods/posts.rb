@@ -8,9 +8,7 @@ module Api2ch
     def call
       response = HTTParty.get("#{BASE_URL}#{@board}/res/#{@thread}.json")
       json = JSON.parse(response.body)
-      json['threads'].each do |thread|
-        return thread['posts'].map { |post| post }
-      end
+      json['threads'].first['posts']
     end
   end
 end
