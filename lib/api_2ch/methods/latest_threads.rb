@@ -1,12 +1,7 @@
 module Api2ch
-  class LatestThreads
-    def initialize(board)
-      @board = board
-    end
-
+  class LatestThreads < Threads
     def call
-      response = HTTParty.get("#{BASE_URL}#{@board}/catalog.json")
-      json = JSON.parse(response.body)
+      json = get_response(:catalog)
       @subjects = []
       @comments = []
       json['threads'].each do |thread|

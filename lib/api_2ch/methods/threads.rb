@@ -6,12 +6,17 @@ module Api2ch
     end
 
     def full
-      response = HTTParty.get("#{BASE_URL}#{@board}/#{@page}.json")
-      JSON.parse(response.body)
+      get_response(@page)
     end
 
     def call
-      response = HTTParty.get("#{BASE_URL}#{@board}/threads.json")
+      get_response(:threads)
+    end
+
+    private
+
+    def get_response(page_name)
+      response = HTTParty.get("#{BASE_URL}#{@board}/#{page_name}.json")
       JSON.parse(response.body)
     end
   end

@@ -2,17 +2,17 @@ require 'spec_helper'
 
 describe Api2ch do
 
-  request = Api2ch::Request.new('b')
+  request = Api2ch::Request.new(board: 'b')
 
   it 'has a version number' do
     expect(Api2ch::VERSION).not_to be nil
   end
 
   describe '#call_threads' do
-    json = request.call_threads
+    json = request.call_threads(board: 'pr')
 
     it 'return right board title' do
-      expect(json['board']).to eq('b')
+      expect(json['board']).to eq('pr')
     end
 
     it 'return json threads' do
@@ -33,8 +33,8 @@ describe Api2ch do
   end
 
   describe '#call_thread_posts' do
-    thread_number = request.call_threads['threads'].first['num']
-    json = request.call_thread_posts(thread_number)
+    thread = request.call_threads['threads'].first['num']
+    json = request.call_thread_posts(thread: thread)
 
     it 'return json posts' do
       expect(json).to be_an_instance_of(Array)
