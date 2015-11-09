@@ -30,6 +30,14 @@ describe Api2ch do
     it 'return json threads' do
       expect(json['threads']).to be_an_instance_of(Array)
     end
+
+    context 'when page incorrect' do
+      incorrect_json = request.call_full_threads(page: 'page')
+
+      it 'return error message' do
+        expect(incorrect_json[:message]).to eq('Not Found')
+      end
+    end
   end
 
   describe '#call_thread_posts' do
@@ -38,6 +46,14 @@ describe Api2ch do
 
     it 'return json posts' do
       expect(json).to be_an_instance_of(Array)
+    end
+
+    context 'when thread number incorrect' do
+      incorrect_json = request.call_thread_posts(thread: 0)
+
+      it 'return error message' do
+        expect(incorrect_json[:message]).to eq('Not Found')
+      end
     end
   end
 

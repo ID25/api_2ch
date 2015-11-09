@@ -9,6 +9,8 @@ module Api2ch
       response = HTTParty.get("#{BASE_URL}#{@board}/res/#{@thread}.json")
       json = JSON.parse(response.body)
       json['threads'].first['posts']
+    rescue JSON::ParserError
+      { message: 'Not Found' }
     end
   end
 end

@@ -25,7 +25,7 @@ module Api2ch
     end
 
     def call_new_threads(board: @board)
-      Api2ch::NewThreads.new(@board).call
+      Api2ch::NewThreads.new(board).call
     end
   end
 end

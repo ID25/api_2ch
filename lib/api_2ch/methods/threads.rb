@@ -18,6 +18,8 @@ module Api2ch
     def get_response(page_name)
       response = HTTParty.get("#{BASE_URL}#{@board}/#{page_name}.json")
       JSON.parse(response.body)
+    rescue JSON::ParserError
+      { message: 'Not Found' }
     end
   end
 end
