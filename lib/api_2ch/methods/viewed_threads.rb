@@ -1,20 +1,9 @@
 module Api2ch
-  class ViewedThreads
-    def initialize(board)
-      @board = board
-    end
-
+  class ViewedThreads < Threads
     def call
-      board_threads = make_request(@board)
-      board_threads['threads'].map     { |i| i['subject'].scrub! }
-      board_threads['threads'].sort_by { |i| - i['views'] }
-    end
-
-    private
-
-    def make_request(board)
-      response = HTTParty.get("#{BASE_URL}#{@board}/threads.json")
-      JSON.parse(response.body)
+      board_threads = get_response(:threads)
+      board_threads['threads'].map { |thread| thread['subject'].scrub! }
+      board_threads['threads'].sort_by { |thread| thread['views'] }.reverse
     end
   end
 end

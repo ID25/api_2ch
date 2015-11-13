@@ -1,16 +1,16 @@
 module Api2ch
   class Posts
-    def initialize(board, num)
+    def initialize(board, thread)
       @board = board
-      @num   = num
+      @thread = thread
     end
 
     def call
-      response = HTTParty.get("#{BASE_URL}#{@board}/res/#{@num}.json")
-      json     = JSON.parse(response.body)
-      json['threads'].each do |thread|
-        return thread['posts'].map { |post| post }
-      end
+      response = HTTParty.get("#{BASE_URL}#{@board}/res/#{@thread}.json")
+      json = JSON.parse(response.body)
+      json['threads'].first['posts']
+    rescue JSON::ParserError
+      { message: 'Not Found' }
     end
   end
 end
