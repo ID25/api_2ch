@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Api2ch do
-
   request = Api2ch::Request.new(board: 'b')
 
   it 'has a version number' do
@@ -69,7 +68,7 @@ describe Api2ch do
     json = request.call_most_viewed_threads
 
     it 'return most viewed threads' do
-      expect(json.map{ |i| i['views'] }).not_to include 0
+      expect(json.map { |i| i['views'] }).not_to include 0
     end
 
     it 'return threads sorted by view' do
